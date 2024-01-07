@@ -1,37 +1,39 @@
-import Directory from './components/Directory/directory.component'
+import { createBrowserRouter,  
+  RouterProvider
+} from 'react-router-dom';
+import Home from './routes/home/home.component';
+import Navigation from './routes/navigation/navigation.component';
+import SignIn from './routes/sign-in/sign-in.component';
+
+
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navigation />,
+    children: [
+      {
+        index: true,
+        element: <Home />
+      }, 
+      {
+        path: "shop",
+        element: <h1>I am the shop</h1>
+      },
+      {
+        path: "sign-in",
+        element: <SignIn />
+      },
+    ]
+    
+  }
+])
+
 
 function App() {
-  const categories = [
-    {
-      "id": 1,
-      "title": "hats",
-      "imageUrl": "https://i.ibb.co/cvpntL1/hats.png"
-    },
-    {
-      "id": 2,
-      "title": "jackets",
-      "imageUrl": "https://i.ibb.co/px2tCc3/jackets.png"
-    },
-    {
-      "id": 3,
-      "title": "sneakers",
-      "imageUrl": "https://i.ibb.co/0jqHpnp/sneakers.png"
-    },
-    {
-      "id": 4,
-      "title": "womens",
-      "imageUrl": "https://i.ibb.co/GCCdy8t/womens.png"
-    },
-    {
-      "id": 5,
-      "title": "mens",
-      "imageUrl": "https://i.ibb.co/R70vBrQ/men.png"
-    }
-  ]
 
-  return (
-    <Directory categories={categories} />
-  );
+  return <RouterProvider router={router} />
+  
 }
 
 export default App;
