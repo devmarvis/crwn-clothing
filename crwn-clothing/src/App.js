@@ -4,6 +4,7 @@ import { createBrowserRouter,
 import Home from './routes/home/home.component';
 import Navigation from './routes/navigation/navigation.component';
 import Authentication from './routes/authentication/authentication.component';
+import Shop from './routes/shop/shop.component';
 
 
 
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
       }, 
       {
         path: "shop",
-        element: <h1>I am the shop</h1>
+        element: <Shop />
       },
       {
         path: "auth",
