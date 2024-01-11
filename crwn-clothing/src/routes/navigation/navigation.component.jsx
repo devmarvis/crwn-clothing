@@ -9,7 +9,7 @@ import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component
 import { UserContext } from "../../contexts/user.context"
 import { signOutUser } from "../../utils/firebase/firebase.utils"
 
-import "./navigation.styles.scss"
+import { LogoContainer, NavLink, NavLinksContainer, NavigationContainer } from "./navigation.styles"
 import { CartContext } from "../../contexts/cart.context"
 
 
@@ -20,37 +20,37 @@ const Navigation = () => {
 
     return (
         <>
-            <div className="navigation">
-                <Link className="logo-container"
+            <NavigationContainer>
+                <LogoContainer
                 to="/"
                 >
                     <CrwnLogo className="logo" />
-                </Link>
-                <div className="nav-links-container">
-                    <Link className="nav-link"
+                </LogoContainer>
+                <NavLinksContainer>
+                    <NavLink
                     to="/shop"
                     >
                         SHOP
-                    </Link>
+                    </NavLink>
                     {
                         currentUser ? (
-                            <span 
+                            <NavLink as="span" 
                             onClick={signOutUser}
-                            className="nav-link">SIGN OUT</span>
+                            >SIGN OUT</NavLink>
                         ) : ( 
-                        <Link className="nav-link"
+                        <NavLink
                         to="/auth"
                         >
                             SIGN IN
-                        </Link> 
+                        </NavLink> 
                         )
                     }
                     <CartIcon /> 
-                </div>
+                </NavLinksContainer>
                 {
                     isCartOpen && <CartDropdown />
                 }
-            </div>
+            </NavigationContainer>
             <Outlet />
         </>
     )

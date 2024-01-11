@@ -15,6 +15,10 @@ import {
     doc,
     getDoc,
     setDoc,
+    collection,
+    writeBatch,
+    query,
+    getDocs
 } from "firebase/firestore"
 
 
@@ -44,14 +48,40 @@ import {
 
   export const db = getFirestore();
 
+  export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = collection(db, collectionKey);
+    const batch = writeBatch(db);
+
+    objectsToAdd.forEach((object) => {
+      const docRef = doc(collectionRef, object.title.toLowerCase());
+      batch.set(docRef, object)
+
+    });
+
+    await batch.commit();
+  }
+
+  export const getCategoriesAndDocument = async () => {
+    const collectRef = collection(db, "categories");
+
+    const q = query(collectRef);
+
+    const querySnapshot = await getDocs(q);
+    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+      const { title, items } = docSnapshot.data();
+      //what finally gets done in the reduce method
+      acc[title.toLowerCase()] = items;
+      return acc;
+    }, {});
+
+    return categoryMap;
+  }
+
   export const createUserDocFromAuth = async(userAuth, additionalInfo = {}) => {
     //creating document reference
     const userDocRef = doc(db, "users", userAuth.uid);
 
     const userSnapshot = await getDoc(userDocRef);
-
-    console.log(userSnapshot.exists());
-
 
     //if document data  does not exists
     if(!userSnapshot.exists()){

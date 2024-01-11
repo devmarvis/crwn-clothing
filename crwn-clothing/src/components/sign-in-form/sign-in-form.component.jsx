@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 import { createUserDocFromAuth, signInUserWithEmailAndPassword, signInWithGooglePopup } from "../../utils/firebase/firebase.utils";
 
@@ -29,7 +29,6 @@ const SignInForm = () => {
         e.preventDefault();
         try {
             const cred = await signInUserWithEmailAndPassword(email, password);
-            // console.log(cred)
 
             setFormFields(defaultFormFields);
         } catch (error) {
@@ -74,7 +73,7 @@ const SignInForm = () => {
                     <Button 
                     onClick={signInWithGoogle}
                     type="button"
-                    buttonType="google">Google sign in</Button>
+                    buttonType={BUTTON_TYPE_CLASSES.google}>Google sign in</Button>
                 </div>
             </form>
         </div>
