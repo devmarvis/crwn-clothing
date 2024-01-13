@@ -6,7 +6,6 @@ import Navigation from './routes/navigation/navigation.component';
 import Authentication from './routes/authentication/authentication.component';
 import Shop from './routes/shop/shop.component';
 import Checkout from './routes/checkout/checkout.component';
-import CategoryPreview from './components/category-preview/category-preview.component';
 import CategoriesPreview from './routes/categories-preview/categories-preview-component';
 import Category from './routes/categories-preview/category/category.component';
 
